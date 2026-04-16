@@ -27,15 +27,3 @@ Web Remote Control: A mobile-responsive dashboard with per-user roles (Tech, Mus
 Integrated Content Creation: Built-in tools for AI stem separation (Demucs) and automated ChordPro lead sheet generation using Google Gemini AI.
 
 Universal Input Mapping: Extensive support for Bluetooth page-turners, MIDI controllers, and global keyboard hotkeys to manage navigation and playback hands-free.
-
-
-
-Tech Stack
-
-Core: Python 3.10+, PyQt6
-
-Audio: SoundDevice, SoundFile, RubberBand, Librosa, Numba (JIT DSP)
-
-Networking: Flask-SocketIO, Zeroconf, Art-Net
-
-AI: Google GenAI (Gemini), Demucs
