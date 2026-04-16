@@ -1,0 +1,102 @@
+{
+    "NEXT_SONG": {
+        "midi": [],
+        "keys": [
+            "space"
+        ]
+    },
+    "PREV_SONG": {
+        "midi": [],
+        "keys": []
+    },
+    "PLAY_PAUSE": {
+        "midi": [],
+        "keys": [
+            "p"
+        ]
+    },
+    "STOP": {
+        "midi": [],
+        "keys": [
+            "s"
+        ]
+    },
+    "SCROLL_UP": {
+        "midi": [],
+        "keys": [
+            "up",
+            "left"
+        ]
+    },
+    "SCROLL_DOWN": {
+        "midi": [],
+        "keys": [
+            "down",
+            "right"
+        ]
+    },
+    "MUTE_MASTER": {
+        "midi": [],
+        "keys": []
+    },
+    "MUTE_CLICK": {
+        "midi": [],
+        "keys": [
+            "c"
+        ]
+    },
+    "MUTE_GROUP_1": {
+        "midi": [],
+        "keys": [
+            "1"
+        ]
+    },
+    "MUTE_GROUP_2": {
+        "midi": [],
+        "keys": [
+            "2"
+        ]
+    },
+    "MUTE_GROUP_3": {
+        "midi": [],
+        "keys": [
+            "3"
+        ]
+    },
+    "MUTE_GROUP_4": {
+        "midi": [],
+        "keys": [
+            "4"
+        ]
+    },
+    "MUTE_FX_1": {
+        "midi": [],
+        "keys": [
+            "5"
+        ]
+    },
+    "MUTE_FX_2": {
+        "midi": [],
+        "keys": [
+            "6"
+        ]
+    },
+    "MUTE_FX_3": {
+        "midi": [],
+        "keys": [
+            "7"
+        ]
+    },
+    "MUTE_FX_4": {
+        "midi": [],
+        "keys": [
+            "8"
+        ]
+    },
+    "TOGGLE_AUTOSCROLL": {
+        "midi": [],
+        "keys": [
+            "a"
+        ]
+    }
+}

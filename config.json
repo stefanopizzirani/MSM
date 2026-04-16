@@ -1,0 +1,53 @@
+{
+    "midi_port": null,
+    "mixer_settings": {
+        "osc_ip": "192.168.1.1",
+        "bpm_sync_targets": [
+            {
+                "fx": 2,
+                "param": 2
+            },
+            {
+                "fx": 4,
+                "param": 2
+            }
+        ]
+    },
+    "sound_settings": {
+        "transition_delay": 1.5,
+        "tick_disable_duration": 5.0,
+        "mtc_fps": 30,
+        "blocksize": 128,
+        "click_freq_accent": 2000,
+        "click_freq_normal": 1500,
+        "click_type": "Sine"
+    },
+    "dmx_settings": {
+        "universe": 0,
+        "accent_r": 255,
+        "accent_g": 0,
+        "accent_b": 0,
+        "accent_dim": 255,
+        "std_r": 0,
+        "std_g": 255,
+        "std_b": 0,
+        "std_dim": 255
+    },
+    "language": "English",
+    "web_users": {
+        "admin": {
+            "password": "admin",
+            "role": "role-tech"
+        }
+    },
+    "optimizer_settings": {
+        "mode": "Harmonic Flow",
+        "harmonic_weight": 0.8,
+        "lock_first": false,
+        "use_global_opt": true
+    },
+    "analysis_profile": "Rock",
+    "spotify_client_id": "",
+    "spotify_client_secret": "",
+    "theme": "Adwaita Dark"
+}

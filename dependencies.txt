@@ -1,0 +1,40 @@
+# Music Studio Manager 2 - Complete Dependencies List
+# Install these packages using: pip install -r dependencies.txt
+
+# --- Core Graphical User Interface ---
+PyQt6               # Used for all windows, dialogs, and application event loops.
+
+# --- Audio & Signal Processing ---
+sounddevice         # Used by the audio engine for direct playback interfacing.
+soundfile           # Used to stream and write audio files directly on disk.
+librosa             # Advanced audio analysis (beat detection, waveform processing).
+numpy               # High-speed data manipulation for audio chunks and volume scaling.
+numba               # JIT compilation for high-performance audio DSP functions.
+
+# --- External Hardware & Sync (Live Show Control) ---
+mido                # Essential for MIDI input/output and parsing.
+python-osc          # Handles OSC protocol communication (e.g., Behringer XR12/18).
+aalink              # Ableton Link support for multi-device synchronization.
+
+# --- AI, Transcribing & Stem Separation ---
+demucs              # Deep learning audio source separation (used via module invocation).
+google-genai        # Used by the ChordPro engine for AI-assisted song transcription.
+
+# --- Web Remote Control & Networking ---
+flask               # Powers the optional Web Remote dashboard.
+flask-socketio      # Provides real-time websocket updates to web clients.
+zeroconf            # Handles local network mDNS service discovery for the remote server.
+
+# --- Utilities & Web Scraping ---
+playwright          # powers background web scraping (e.g., ultimate-guitar fetching).
+thefuzz             # Used for fuzzy string matching (e.g., matching song titles).
+spotipy             # Integration with Spotify API for cloud-based song analysis.
+psutil              # Live system monitoring for CPU/RAM performance tracking.
+qrcode              # Generates QR codes for easy mobile connection.
+pydub               # Handles audio format conversion (e.g., WAV to MP3 export).
+keyboard            # Global hotkey hooks for Bluetooth page-turner pedals.
+
+# ----------------------------------------------------------------------------------
+# Standard Python Libraries used (No installation required)
+# os, sys, json, threading, socket, math, re, csv, glob, time, subprocess, pathlib
+# ----------------------------------------------------------------------------------
