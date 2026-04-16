@@ -1,6 +1,9 @@
+import os
+import logging
 import librosa
 import numpy as np
 from PyQt6.QtCore import QThread, pyqtSignal
+from thefuzz import process
 
 class SongLoaderWorker(QThread):
     finished = pyqtSignal(bool)
@@ -65,11 +68,13 @@ class BatchAnalysisWorker(QThread):
         # Load profile from config
         self.profile = self.data_manager.config.get("analysis_profile", "Balanced")
 
+    def _get_supported_extensions(self):
+        return ('.wav', '.mp3', '.ogg', '.flac', '.aif', '.aiff')
+
     def stop(self):
         self.is_cancelled = True
 
     def run(self):
-        import os
         base_dir = os.path.join("music", "Songs")
         
         for i, title in enumerate(self.song_titles):
@@ -80,20 +85,36 @@ class BatchAnalysisWorker(QThread):
             song_dir = self.finder(base_dir, title)
             target_file = None
             if song_dir and os.path.isdir(song_dir):
-                files = [os.path.join(song_dir, f) for f in os.listdir(song_dir) if f.endswith(('.wav', '.mp3'))]
-                for f in files:
-                    if title.lower() in os.path.basename(f).lower():
-                        target_file = f
-                        break
-                if not target_file and files:
-                    target_file = files[0]
+                all_files = [os.path.join(song_dir, f) for f in os.listdir(song_dir) 
+                             if f.lower().endswith(self._get_supported_extensions())]
+                
+                if all_files:
+                    # Use fuzzy match to find the best filename match (e.g. handle minor punctuation differences)
+                    choices = {os.path.splitext(os.path.basename(f))[0]: f for f in all_files}
+                    best_match = process.extractOne(title, list(choices.keys()))
+                    
+                    if best_match and best_match[1] >= 80:
+                        target_file = choices[best_match[0]]
+                    else:
+                        # Try to find a drum stem
+                        drums = [f for f in all_files if 'drum' in os.path.basename(f).lower()]
+                        target_file = drums[0] if drums else all_files[0]
             
             if target_file:
-                # Pass the genre profile to the analyzer
-                bpm, key, energy = self.analyzer.analyze(target_file, profile=self.profile)
-                if bpm:
-                    self.data_manager.update_song_analysis(title, bpm, key, energy)
-                    self.song_finished.emit(title, bpm, key, energy)
+                try:
+                    # Pass the genre profile to the analyzer
+                    bpm, key, energy = self.analyzer.analyze(target_file, profile=self.profile)
+                    if bpm:
+                        self.data_manager.update_song_analysis(title, bpm, key, energy)
+                        self.song_finished.emit(title, bpm, key, energy)
+                        continue
+                except Exception as e:
+                    logging.error(f"Analysis failed for {title}: {e}")
+            
+            # If we reach here, analysis failed or file was missing
+            # Re-emit current data so the UI refreshes/unblocks
+            analysis = self.data_manager.get_song_analysis(title)
+            self.song_finished.emit(title, analysis['bpm'], analysis['key'], analysis['energy'])
             
         self.finished.emit()
 

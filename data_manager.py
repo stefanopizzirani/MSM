@@ -256,7 +256,7 @@ class DataManager:
         if key is not None: data['key'] = key
         # 'energy' is the AI local score
         if energy is not None:
-            data['energy'] = int(round(float(energy)))
+            data['energy'] = round(float(energy), 2)
         # 'manual_energy' is the user override
         if manual_energy is not None: data['manual_energy'] = manual_energy
         # 'spotify_data' contains cloud features
@@ -265,7 +265,7 @@ class DataManager:
             if 'bpm' in normalized_spotify and normalized_spotify['bpm'] is not None:
                 normalized_spotify['bpm'] = int(round(float(normalized_spotify['bpm'])))
             if 'energy' in normalized_spotify and normalized_spotify['energy'] is not None:
-                normalized_spotify['energy'] = int(round(float(normalized_spotify['energy'])))
+                normalized_spotify['energy'] = round(float(normalized_spotify['energy']), 2)
             data['spotify_data'] = normalized_spotify
         
         # PERSIST TO SQLITE

@@ -1,6 +1,7 @@
 import json
 import logging
 import threading
+import time
 import mido
 from PyQt6.QtCore import QObject, pyqtSignal, QTimer, Qt, QEvent
 from PyQt6.QtGui import QKeyEvent
@@ -126,7 +127,6 @@ class MappingManager(QObject):
                         self._handle_midi_input(raw)
             except Exception as e:
                 logger.debug(f"MIDI loop error: {e}")
-            import time
             time.sleep(0.01) # Small sleep to prevent 100% CPU
 
     def _handle_midi_input(self, raw_bytes):

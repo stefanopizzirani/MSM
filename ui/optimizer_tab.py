@@ -165,7 +165,7 @@ class SetlistOptimizerTab(QWidget):
             local_ai = analysis['energy_ai_baseline']
             
             item.setText(0, str(i+1))
-            item.setText(5, f"{int(round(float(effective_energy)))}")
+            item.setText(5, f"{float(effective_energy):.2f}")
             
             # Ensure metadata is current (for next drag)
             item.setData(1, Qt.ItemDataRole.UserRole, song)
@@ -267,7 +267,7 @@ class SetlistOptimizerTab(QWidget):
                 song.get('key', '?'),
                 song.get('camelot', '?'),
                 f"{int(round(float(song['bpm'])))}",
-                f"{int(round(float(effective_energy)))}",
+                f"{float(effective_energy):.2f}",
                 "", # Slider Adj
                 ""  # Flow % Indicator
             ])
@@ -325,7 +325,7 @@ class SetlistOptimizerTab(QWidget):
                 s['bpm'] = int(round(float(bpm)))
                 s['key'] = key
                 s['camelot'] = MusicMath.get_camelot(key)
-                s['energy'] = int(round(float(energy)))
+                s['energy'] = round(float(energy), 2)
                 break
         self.refresh_table()
 

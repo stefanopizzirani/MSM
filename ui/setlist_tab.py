@@ -17,6 +17,7 @@ import soundfile as sf
 from ui.themes import THEMES
 from ui.workers import SongLoaderWorker, BPMWorker
 from utils import find_file_case_insensitive
+from translations import TRANSLATIONS
 from ui_components import SmoothDial, ClickableSlider, WaveformWidget
 from dialogs import SongEditorDialog, EditSetlistDialog
 from ui.undo_commands import MoveSongCommand, UpdateSetlistCommand, TransposeCommand
@@ -1010,8 +1011,12 @@ class SetlistTab(QWidget):
             pan_knob.setFixedSize(24, 24)
             pan_knob.setToolTip(f"Pan: {name}")
             
-            # Reset pan on Right Click
-            pan_knob.mousePressEvent = lambda e, p=pan_knob: p.setValue(0) if e.button() == Qt.MouseButton.RightButton else SmoothDial.mousePressEvent(p, e)
+            # Reset pan on Right Click (using consistent robust pattern)
+            original_pan_press = pan_knob.mousePressEvent
+            def stem_pan_press(event, dial=pan_knob, original=original_pan_press):
+                if event.button() == Qt.MouseButton.RightButton: dial.setValue(0)
+                else: original(event)
+            pan_knob.mousePressEvent = stem_pan_press
             
             pan_knob.valueChanged.connect(lambda v, n=name: self.audio_engine.set_pan(n, v / 100.0))
             
